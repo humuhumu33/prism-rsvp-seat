@@ -18,11 +18,12 @@ The three honesty levels (R2):
 `cargo xtask audit-limits` fails if any code path returns an error the
 model does not sanction.
 
-## contract
+## rsvp_seat
 
 | ID | Level | Statement |
 | --- | --- | --- |
-| `TC-01` | `build` | The checker answers conformant exactly when every universal policy file's observed digest equals its locked digest |
+| `RS-01` | `build` | The app never answers confirmed when attending is no |
+| `RS-02` | `build` | The app never answers confirmed when party is above seats |
 
 ## Cited authorities
 

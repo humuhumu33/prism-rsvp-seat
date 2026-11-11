@@ -1,0 +1,66 @@
+\begin{lexlean}{RsvpSeatProofs}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\importmodule{RsvpSeat}
+\title{Text application model}
+\begin{semanticmodule}
+definition{
+  name: breaksInv001,
+  parameters: [request : RsvpSeat::Request],
+  result: Bool,
+  body: ((((((project request attending) <? 3) && ((project request party) <=? 6)) && ((project request seats) <=? 500)) && ((project request attending) =? (RsvpSeat::attendingNo))) && ((RsvpSeat::judge request) =? (RsvpSeat::answerConfirmed)))
+}
+
+theorem{
+  name: inv001Holds,
+  parameters: [request : RsvpSeat::Request],
+  statement: ((breaksInv001 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      RsvpSeat::answerConfirmed,
+      RsvpSeat::answerNone,
+      RsvpSeat::answerWaitlist,
+      RsvpSeat::attendingMaybe,
+      RsvpSeat::attendingNo,
+      RsvpSeat::attendingYes,
+      RsvpSeat::judge,
+      RsvpSeat::rule1,
+      RsvpSeat::rule2,
+      RsvpSeat::rule3,
+      breaksInv001
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: breaksInv002,
+  parameters: [request : RsvpSeat::Request],
+  result: Bool,
+  body: ((((((project request attending) <? 3) && ((project request party) <=? 6)) && ((project request seats) <=? 500)) && ((project request seats) <? (project request party))) && ((RsvpSeat::judge request) =? (RsvpSeat::answerConfirmed)))
+}
+
+theorem{
+  name: inv002Holds,
+  parameters: [request : RsvpSeat::Request],
+  statement: ((breaksInv002 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      RsvpSeat::answerConfirmed,
+      RsvpSeat::answerNone,
+      RsvpSeat::answerWaitlist,
+      RsvpSeat::attendingMaybe,
+      RsvpSeat::attendingNo,
+      RsvpSeat::attendingYes,
+      RsvpSeat::judge,
+      RsvpSeat::rule1,
+      RsvpSeat::rule2,
+      RsvpSeat::rule3,
+      breaksInv002
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+\end{semanticmodule}
+\end{lexlean}
